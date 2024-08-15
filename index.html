@@ -1,26 +1,330 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/flower.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Jekyll v3.8.5">
+  <title>Happy Birthday!!</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    canvas{
+      position:absolute;
+      align-items: center;
+      left:0;
+      top:0;
+      height: 500;
+      width: 500;
+    }
+  </style>
+  <link href="css/cover.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/flower.css">
 </head>
-<body>
-<body class="not-loaded">
-    <div class="night">
+
+<audio id="myAudio" loop>
+  <source src="bgm.mp4#t=00:02" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<body class="text-center">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+      <div class="col-md-12">
+        <nav class="nav nav-masthead justify-content-center">
+          <!-- <a class="nav-link active" href="#">Home</a>
+          <a class="nav-link" href="#">Wishes</a>
+          <a class="nav-link" href="#">Memories</a> -->
+        </nav>
+      </div>
+    </header>
+
+    <div class="inner cover">
+      <h1 class="cover-heading">Inge Arfatikka! &hearts;</h1>
+      <div class="col-md-12 message-text" id="text-typing"></div>
     </div>
-    <div class="div-center">
-      <h1 class="happy-birthday">
-        Happy Birthday
-        <br>
-        <p style="font-size: 75px"> Afifah C** A* </p>
-      </h1>
-      <a href="flower.html" class="button"> 
-        I have a give for you 
-      </a>
+
+    <div>
+      <canvas id="canvas"></canvas>
     </div>
-  </body>
+
+    <footer class="mastfoot mt-auto">
+      <div class="inner">
+        <p>From your lover <a href="https://getbootstrap.com/"> Muh Rifqi</a></p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade modal-hidden" id="playMusicModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>
+            Haloo Sayaangg &hearts;
+          </p>
+          <small> Click anywhere to start yah sayaang, enjoy &#128518; </small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/jquery-3.3.1.slim.min.js"></script>
+  <script src="scripts/confetti.browser.min.js"></script>
+  <script src="scripts/bootstrap.min.js"></script>
+  <script>
+    function snow() {
+      let skew = 1;
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      (function frame() {
+        let ticks = 200;
+        skew = Math.max(0.8, skew - 0.001);
+
+        confetti({
+          particleCount: 1,
+          startVelocity: 0,
+          ticks: ticks,
+          origin: {
+            x: Math.random(),
+            // since particles fall down, skew start toward the top
+            y: (Math.random() * skew) - 0.2
+          },
+          colors: ['#F0A8D0', '#F0A8D0'],
+          shapes: ['circle'],
+          gravity: randomInRange(0.4, 0.6),
+          scalar: randomInRange(0.4, 1),
+          drift: randomInRange(-0.4, 0.4)
+        });
+
+        requestAnimationFrame(frame);
+      }());
+    }
+
+    function fireworks() {
+      let duration = 40 * 1000;
+      let animationEnd = Date.now() + duration;
+      let defaults = { 
+        startVelocity: 30, 
+        spread: 360, 
+        ticks: 1600, 
+        zIndex: 0,
+      };
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      let interval = setInterval(function() {
+        let timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+
+        let particleCount = 50 * (timeLeft / duration);
+        // since particles fall down, start a bit higher than random
+        confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+        confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+      }, 250);
+    }
+
+    function playMusic() {
+      const x = document.getElementById("myAudio"); 
+      x.play();
+    }
+  </script>
+  <script>
+    /**
+     * rundown script
+     */
+    let i = 0;
+    let index = 0;
+    let maxReach = false;
+    let speed = 60;
+    let triggerSnow = false;
+    let triggerFireworks = false;
+
+    $('#playMusicModal').modal('show');
+    $('#playMusicModal').on('hidden.bs.modal', function (e) {
+      playMusic();
+      rundown();
+      snow();
+    });
+
+    const texts = [
+      "Hi Sayangg!, Wishing you a birthday that's as amazing as you are. May this year bring you closer to your dreams and fill your life with endless happiness and success.                     ",
+      'From the moment you came into my life, every day has felt like a celebration. Your laughter brightens my world, your kindness warms my heart, and your love is the greatest gift of all. On your special day, I just want to remind you how incredibly cherished and adored you are.                        ',
+      'You are my best friend, my confidante, and my greatest adventure. I am so grateful for every moment we share and every memory we create. Today is all about celebrating the amazing person you are, and I hope it’s filled with as much joy and love as you bring into my life.                     ',
+      'Here’s to more laughter, more adventures, and countless beautiful moments together. I love you more than words can say. Happy Birthday, kesayangan akuu!                         ',
+    ];
+
+    function rundown() {
+      if (!texts[index]) {
+        fireworks();
+        return false;
+      };
+      if (texts[index].length === i && index === texts.length - 1) {
+        fireworks();
+        playPhotos();
+        return false;
+      };
+
+      if (i < texts[index].length && maxReach == false) {
+        document.getElementById(`text-typing`).innerHTML += texts[index].charAt(i);
+        i++;
+      }  else if (i == texts[index].length || maxReach == true) {
+        // delete function
+        if (i <= 0) {
+          // if reach end of delete, continue write
+          i = 0;
+          speed = 60;
+          index++;
+          maxReach = false;
+        } else {
+          // if still delete, change speed of delete
+          speed = 20;
+          maxReach = true;
+          i-= texts[index].length / 10;
+          document.getElementById("text-typing").innerHTML = texts[index].substring(0, i); 
+        }
+      }
+
+      setTimeout(rundown, speed);
+    }
+
+    // rundown();
+  </script>
+  <script>
+    function playPhotos(params) {
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const images = []; // Array to hold image objects
+        const circleRadius = 125; // Radius of the circle
+        const imageAssets = [
+            'assets/image-1.jpg',
+            'assets/image-2.jpg',
+            'assets/image-3.jpg',
+            'assets/image-4.jpg',
+            'assets/image-5.jpg',
+        ];
+        const imageCount = imageAssets.length; // Number of images to animate
+        let currentImageIndex = 0; // To track the current image to be displayed
+        let alpha = 0; // Alpha value for fade-in effect
+
+        // Load images
+        for (let i = 0; i < imageCount; i++) {
+            const img = new Image();
+            img.src = imageAssets[i]; // Update with your image path
+            img.onload = () => {
+                const imgObject = {
+                    image: img,
+                    x: Math.random() * (canvas.width - circleRadius * 2) + circleRadius,
+                    y: Math.random() * (canvas.height - circleRadius * 2) + circleRadius,
+                    dx: (Math.random() - 0.5) * 3,
+                    dy: (Math.random() - 0.5) * 3,
+                    radius: circleRadius,
+                    alpha: 0, // Start with full transparency
+                };
+                images.push(imgObject);
+            };
+        }
+
+        // Animation loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Only animate images up to the current image index
+            for (let i = 0; i <= currentImageIndex; i++) {
+                const imgObject = images[i];
+
+                // Fade-in effect
+                if (imgObject.alpha < 1) {
+                    imgObject.alpha += 0.02; // Increase alpha value to fade in
+                }
+
+                // Move the image
+                imgObject.x += imgObject.dx;
+                imgObject.y += imgObject.dy;
+
+                // Bounce off the walls
+                if (imgObject.x + imgObject.radius > canvas.width || imgObject.x - imgObject.radius < 0) {
+                    imgObject.dx *= -1;
+                }
+                if (imgObject.y + imgObject.radius > canvas.height || imgObject.y - imgObject.radius < 0) {
+                    imgObject.dy *= -1;
+                }
+
+                // Draw the circular image
+                ctx.save();
+                ctx.globalAlpha = imgObject.alpha; // Set transparency for fade-in
+                ctx.beginPath();
+                ctx.arc(imgObject.x, imgObject.y, imgObject.radius, 0, Math.PI * 2, false);
+                ctx.clip();
+
+                ctx.drawImage(
+                    imgObject.image,
+                    imgObject.x - imgObject.radius,
+                    imgObject.y - imgObject.radius,
+                    imgObject.radius * 2,
+                    imgObject.radius * 2
+                );
+
+                ctx.restore();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Start animation when all images are loaded
+        function checkImagesLoaded() {
+            if (images.length === imageCount) {
+                // Start animation and show images one by one
+                animate();
+                showImagesSequentially();
+            } else {
+                requestAnimationFrame(checkImagesLoaded);
+            }
+        }
+
+        // Function to reveal images one by one
+        function showImagesSequentially() {
+            if (currentImageIndex < imageCount - 1) {
+                currentImageIndex++;
+                setTimeout(showImagesSequentially, 1000); // Delay in milliseconds between each image
+            }
+        }
+
+        checkImagesLoaded();
+    }
+  </script>
 </body>
+
 </html>

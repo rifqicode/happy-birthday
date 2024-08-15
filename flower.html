@@ -4,12 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Happy Birthday Aca</title>
     <link rel="stylesheet" href="css/flower.css">
 </head>
 <body>
-<body class="not-loaded">
-    <div class="night"></div>
+<body>
+    <!-- <div class="night"></div> -->
+    <div style="position:absolute; top: 20px;">
+      <audio controls autoplay id="audio">
+        <source src="bgm.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
     <div class="flowers">
       <div class="flower flower--1">
         <div class="flower__leafs flower__leafs--1">
@@ -310,10 +316,10 @@
 </body>
 <script>   
 onload = () => {
-  const c = setTimeout(() => {
-    document.body.classList.remove("not-loaded");
-    clearTimeout(c);
-  }, 1000);
+  // const c = setTimeout(() => {
+  //   document.body.classList.remove("not-loaded");
+  //   clearTimeout(c);
+  // }, 1000);
 };
 </script>
 </html>

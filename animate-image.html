@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Images</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="script.js"></script>
+</body>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const images = []; // Array to hold image objects
+const imageCount = 5; // Number of images to animate
+
+// Load images
+for (let i = 0; i < imageCount; i++) {
+    const img = new Image();
+    img.src = 'assets/sunflower.jpg'; // Update with your image path
+    img.onload = () => {
+        const imgObject = {
+            image: img,
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            dx: (Math.random() - 0.5) * 4,
+            dy: (Math.random() - 0.5) * 4,
+            width: 200,  // Width of the image
+            height: 200, // Height of the image
+        };
+        images.push(imgObject);
+    };
+}
+
+// Animation loop
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    images.forEach((imgObject) => {
+        // Move the image
+        imgObject.x += imgObject.dx;
+        imgObject.y += imgObject.dy;
+
+        // Bounce off the walls
+        if (imgObject.x + imgObject.width > canvas.width || imgObject.x < 0) {
+            imgObject.dx *= -1;
+        }
+        if (imgObject.y + imgObject.height > canvas.height || imgObject.y < 0) {
+            imgObject.dy *= -1;
+        }
+
+        // Draw the image
+        ctx.drawImage(imgObject.image, imgObject.x, imgObject.y, imgObject.width, imgObject.height);
+    });
+
+    requestAnimationFrame(animate);
+}
+
+// Start animation when all images are loaded
+function checkImagesLoaded() {
+    if (images.length === imageCount) {
+        animate();
+    } else {
+        requestAnimationFrame(checkImagesLoaded);
+    }
+}
+
+checkImagesLoaded();
+</script>
